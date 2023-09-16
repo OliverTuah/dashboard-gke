@@ -14,6 +14,7 @@ function index() {
 
   return (
     <>
+      <></>
       <Flex direction={"row"} gap={"50px"}>
         <Navbar stateComponent={toggleButton} />
         {component == "button1" ? (
