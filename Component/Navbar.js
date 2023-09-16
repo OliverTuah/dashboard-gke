@@ -1,148 +1,129 @@
-import { Inter } from "next/font/google";
-import { Button, Icon, Stack, Flex, Box, Text } from "@chakra-ui/react";
-import { BiSolidDashboard, BiSolidReport, BiSolidData } from "react-icons/bi";
-import { FaCalculator } from "react-icons/fa";
-import { HStack } from "@chakra-ui/react";
+import { useState } from "react";
+import { Avatar, Box, Flex, ChakraProvider } from "@chakra-ui/react";
+import CompButton from "./CompButton";
+import { BiSolidDashboard } from "react-icons/Bi";
+import { PiHandHeart } from "react-icons/Pi";
+import { RiFileList3Line } from "react-icons/Ri";
+import { TbReportMoney } from "react-icons/Tb";
 import { Image } from "@chakra-ui/react";
-import { Avatar } from "@chakra-ui/react";
 
-const inter = Inter({ subsets: ["latin"] });
+function Navbar({ stateComponent }) {
+  const [buttonStates, setButtonStates] = useState({
+    button1: true,
+    button2: false,
+    button3: false,
+    button4: false,
+  });
 
-export default function Navbar() {
+  const toggleButton = (buttonKey) => {
+    setButtonStates((prevState) => ({
+      button1:
+        buttonKey === "button1"
+          ? prevState.button1 == true
+            ? true
+            : !prevState.button1
+          : false,
+      button2:
+        buttonKey === "button2"
+          ? prevState.button2 == true
+            ? true
+            : !prevState.button2
+          : false,
+      button3:
+        buttonKey === "button3"
+          ? prevState.button3 == true
+            ? true
+            : !prevState.button3
+          : false,
+      button4:
+        buttonKey === "button4"
+          ? prevState.button4 == true
+            ? true
+            : !prevState.button4
+          : false,
+    }));
+    stateComponent(buttonKey);
+  };
+
   return (
     <>
       <Flex
-        bg={"white"}
-        direction={"column"}
-        width={(null, null, "50px", "70px", "200px")}
-        height={(null, null, "50vh", "70vh", "100vh")}
-        align={"center"}
+        w={"183px"}
+        h={"1024px"}
         px={"20px"}
         py={"50px"}
-        color={"rgba(255, 255, 255, 1)"}
-        boxShadow={"0 2px 5px #5B47BC30"}
-        position={"sticky"}>
-        <Flex flex={1} direction={"column"} gap={"50px"}>
-          <Box
-            boxSize="76px"
-            display="flex"
-            alignSelf="center"
-            justifyItems="center">
-            <Image src="\Logo GKE.png" alt="Logo GKE" />
-          </Box>
-          <Flex direction={"column"} h={"full"} justify={"space-between"}>
-            <Stack spacing={"20px"}>
-              <Button
-                _hover={{
-                  color: "#21965333",
-                  variant: "solid",
-                  textColor: "rgba(33, 150, 83, 1)",
-                  fontWeight: "Bold",
-                }}
-                color={"#FFFFFF"}
-                variant="solid"
-                textColor={"#828282"}
-                width={"164px"}
-                height={"44px"}
-                px={"10px"}
-                py={"20px"}>
-                <Flex ms="20px" me="20px" mt="10px" mb="10px" w="full">
-                  <HStack width="full" spacing={"15px"}>
-                    <Icon as={BiSolidDashboard} boxSize={"24px"} />
-                    <Text
-                      align={"left"}
-                      w={"90px"}
-                      fontSize={"16px"}
-                      fontWeight={"Regular"}>
-                      Dashboard
-                    </Text>
-                  </HStack>
-                </Flex>
-              </Button>
-              <Button
-                _hover={{
-                  color: "#21965320",
-                  variant: "solid",
-                  textColor: "rgba(33, 150, 83, 1)",
-                  fontWeight: "Bold",
-                }}
-                color={"#FFFFFF"}
-                variant="solid"
-                textColor={"#828282"}
-                width={"164px"}
-                height={"44px"}
-                px={"10px"}
-                py={"20px"}>
-                <Flex ms="20px" me="20px" mt="10px" mb="10px" w="full">
-                  <HStack width="full" spacing={"15px"}>
-                    <Icon as={BiSolidReport} boxSize={"24px"} />
-                    <Text
-                      align={"left"}
-                      w={"90px"}
-                      fontSize={"16px"}
-                      fontWeight={"Regular"}>
-                      Laporan
-                    </Text>
-                  </HStack>
-                </Flex>
-              </Button>
-              <Button
-                _hover={{
-                  color: "#21965320",
-                  variant: "solid",
-                  textColor: "rgba(33, 150, 83, 1)",
-                  fontWeight: "Bold",
-                }}
-                color={"#FFFFFF"}
-                variant="solid"
-                textColor={"#828282"}
-                width={"164px"}
-                height={"44px"}>
-                <Flex ms="20px" me="20px" mt="10px" mb="10px" w="full">
-                  <HStack width="full" spacing={"15px"}>
-                    <Icon as={FaCalculator} boxSize={"20px"} />
-                    <Text
-                      align={"left"}
-                      w={"90px"}
-                      fontSize={"16px"}
-                      fontWeight={"Regular"}>
-                      Keuangan
-                    </Text>
-                  </HStack>
-                </Flex>
-              </Button>
-              <Button
-                _hover={{
-                  color: "#21965320",
-                  variant: "solid",
-                  textColor: "rgba(33, 150, 83, 1)",
-                  fontWeight: "Bold",
-                }}
-                color={"#FFFFFF"}
-                variant="solid"
-                textColor={"#828282"}
-                width={"164px"}
-                height={"44px"}>
-                <Flex ms="20px" me="20px" mt="10px" mb="10px" w="full">
-                  <HStack width="full" spacing={"15px"}>
-                    <Icon as={BiSolidData} boxSize={"24px"} />
-                    <Text
-                      align={"left"}
-                      w={"90px"}
-                      fontSize={"16px"}
-                      fontWeight={"Regular"}>
-                      Data Jemaat
-                    </Text>
-                  </HStack>
-                </Flex>
-              </Button>
-            </Stack>
-            <Stack boxSize="50px" alignSelf="center">
-              <Avatar size={"55px"} name="Sam" src="\avatar profile.png" />
-            </Stack>
-          </Flex>
+        direction={"column"}
+        gap={"50px"}
+        color={"white"}
+        boxShadow={"0px 4px 10px #4147D520"}>
+        <Box w={"83px"} h={"83px"} alignSelf="center">
+          <Image src="\Logo GKE.png" alt="Logo GKE" />
+        </Box>
+        <Flex
+          direction={"column"}
+          alignItems={"center"}
+          justify={"space-between"}
+          h={"full"}>
+          <ChakraProvider>
+            <Flex direction={"column"} gap={"20px"}>
+              <CompButton
+                setButton={() => toggleButton("button1")}
+                ColorB={buttonStates.button1 ? "#D7E0FF" : "#FFFFFF"}
+                TextColor={buttonStates.button1 ? "#4147D5" : "#9A9A9A"}
+                SizeText="16px"
+                fontType={buttonStates.button1 ? "Bold" : "Regular"}
+                px="10px"
+                py="10px"
+                Alignitems="flex-start"
+                LIcon={<BiSolidDashboard />}
+                text={buttonStates.button1 ? "Dashboard" : "Dashboard"}
+              />
+              <CompButton
+                setButton={() => toggleButton("button2")}
+                ColorB={buttonStates.button2 ? "#D7E0FF" : "#FFFFFF"}
+                TextColor={buttonStates.button2 ? "#4147D5" : "#9A9A9A"}
+                SizeText="16px"
+                fontType={buttonStates.button2 ? "Bold" : "Regular"}
+                px="10px"
+                py="10px"
+                IconSpace="10px"
+                Alignitems="flex-start"
+                LIcon={<PiHandHeart />}
+                text={buttonStates.button2 ? "Product" : "Product"}
+              />
+              <CompButton
+                setButton={() => toggleButton("button3")}
+                ColorB={buttonStates.button3 ? "#D7E0FF" : "#FFFFFF"}
+                TextColor={buttonStates.button3 ? "#4147D5" : "#9A9A9A"}
+                SizeText="16px"
+                fontType={buttonStates.button3 ? "Bold" : "Regular"}
+                IconSpace="10px"
+                px="10px"
+                py="10px"
+                Alignitems="flex-start"
+                LIcon={<RiFileList3Line />}
+                text="Orders"
+              />
+              <CompButton
+                setButton={() => toggleButton("button4")}
+                ColorB={buttonStates.button4 ? "#D7E0FF" : "#FFFFFF"}
+                TextColor={buttonStates.button4 ? "#4147D5" : "#9A9A9A"}
+                SizeText="16px"
+                fontType={buttonStates.button4 ? "Bold" : "Regular"}
+                IconSpace="10px"
+                px="10px"
+                py="10px"
+                Alignitems="flex-start"
+                LIcon={<TbReportMoney />}
+                text="Report"
+              />
+            </Flex>
+            <Avatar bg="teal.500" size="md" />
+          </ChakraProvider>
         </Flex>
       </Flex>
     </>
   );
 }
+
+export default Navbar;
